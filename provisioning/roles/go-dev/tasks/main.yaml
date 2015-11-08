@@ -1,0 +1,17 @@
+---
+- name: Download Go
+  get_url:
+    url=https://storage.googleapis.com/golang/go1.5.1.linux-amd64.tar.gz
+    dest=~/go-linux-amd64.tar.gz
+    mode=0440
+
+- name: Install Go
+  command: tar -C /usr/local -xzf ~/go-linux-amd64.tar.gz
+    creates=/usr/local/go
+
+- name: Add Go to PATH
+  copy:
+    content='export PATH=$PATH:/usr/local/go/bin'
+    dest=/etc/profile.d/go.sh
+    owner=root group=root mode=644
+

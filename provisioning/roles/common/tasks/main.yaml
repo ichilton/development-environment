@@ -1,0 +1,29 @@
+---
+- name: Install packages
+  apt: name={{ item }}
+  with_items:
+    - ca-certificates
+    - ntp
+    - bzip2
+    - screen
+    - tmux
+    - acpid
+    - rsync
+    - tcpdump
+    - zsh
+    - vim
+    - traceroute
+    - telnet
+    - dnsutils
+    - mtr-tiny
+    - unzip
+    - git
+    - mercurial
+    - build-essential
+
+- name: Remove Exim
+  apt: name=exim4 state=absent purge=yes
+
+- name: Enable NTPD
+  service: name=ntp enabled=yes state=started
+

@@ -1,0 +1,61 @@
+---
+- name: Install packages
+  apt: name={{ item }}
+  with_items:
+    - ruby
+    - ruby-dev
+
+- name: Install Bundler
+  command: gem install bundler
+    creates=/usr/local/bin/bundle
+
+- name: Clone chruby repo
+  git:
+    repo=https://github.com/postmodern/chruby.git
+    dest=/var/cache/chruby-src
+    force=yes
+  register: chruby
+
+- name: Install chruby
+  shell: 'cd /var/cache/chruby-src && sudo ./scripts/setup.sh'
+  when: chruby.changed
+
+
+- name: Clone gem_home repo
+  git:
+    repo=https://github.com/postmodern/gem_home.git
+    dest=/var/cache/gem_home-src
+    force=yes
+  register: gemhome
+
+- name: Install gem_home
+  shell: 'cd /var/cache/gem_home-src && sudo make install'
+  when: gemhome.changed
+
+- name: Add gem_home to profile.d
+  copy:
+    src=gem_home.sh
+    dest=/etc/profile.d/gem_home.sh
+    owner=root group=root mode=644
+
+
+- name: Clone ruby-install repo
+  git:
+    repo=https://github.com/postmodern/ruby-install.git
+    dest=/var/cache/ruby-install-src
+    force=yes
+  register: rubyinstall
+
+- name: Install ruby-install
+  shell: 'cd /var/cache/ruby-install-src && sudo make install'
+  when: rubyinstall.changed
+
+
+- name: Build Ruby 2.3.3
+  command: ruby-install ruby 2.2.3
+    creates=/opt/rubies/ruby-2.2.3/bin/ruby
+
+- name: Build Ruby 1.9.3
+  command: ruby-install ruby 1.9.3-p551
+    creates=/opt/rubies/ruby-1.9.3-p551/bin/ruby
+
