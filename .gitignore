@@ -1,1 +1,9 @@
-/.vagrant/
+# Ignore everything:
+*
+
+# Except:
+!/.gitignore
+!/README.md
+!/Vagrantfile
+!/provisioning/
+
