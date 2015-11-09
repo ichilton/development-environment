@@ -12,6 +12,12 @@ Vagrant.configure(2) do |config|
      vb.memory = "1024"
   end
 
+  config.vm.provider "virtualbox" do |vb|
+    # Use NFS for synced folders (faster):
+    # config.vm.network :private_network, ip: "33.33.33.10"
+    # config.vm.synced_folder ".", "/vagrant", type: "nfs"
+  end
+
   # SSH agent forwarding:
   config.ssh.forward_agent = true
 
