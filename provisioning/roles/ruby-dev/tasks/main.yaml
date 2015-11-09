@@ -4,6 +4,9 @@
   with_items:
     - ruby
     - ruby-dev
+    - libmysqlclient-dev
+    - libxml2-dev
+    - libxslt-dev
 
 - name: Install Bundler
   command: gem install bundler
