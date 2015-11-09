@@ -5,4 +5,5 @@
     - common
     - ruby-dev
     - go-dev
+    - ansible
 

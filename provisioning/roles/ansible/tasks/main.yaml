@@ -1,0 +1,9 @@
+---
+- name: Check if Ansible exists
+  stat: path=/usr/bin/ansible
+  register: ansiblecheck
+
+- name: Install Ansible
+  include: install.yaml
+  when: ansiblecheck.stat.exists == False
+
