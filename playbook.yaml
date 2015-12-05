@@ -1,9 +1,21 @@
 ---
 - hosts: all
-  sudo : yes
+  sudo: yes
   roles:
     - common
+
+- hosts: ruby-dev
+  sudo: yes
+  roles:
     - ruby-dev
+
+- hosts: go-dev
+  sudo: yes
+  roles:
     - go-dev
+
+- hosts: ansible
+  sudo: yes
+  roles:
     - ansible
 
