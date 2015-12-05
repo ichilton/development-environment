@@ -3,11 +3,6 @@
   apt: name={{ item }} install_recommends=no
   with_items:
     - python-setuptools
-    - devscripts
-    - fakeroot
-    - asciidoc
-    - cdbs
-    - debhelper
     - python-support
     - python-jinja2
     - python-yaml
@@ -19,15 +14,24 @@
 - name: Download Ansible
   get_url:
     url=https://github.com/ansible/ansible/archive/v1.9.4-1.tar.gz
-    dest=~/ansible.tar.gz
+    dest=/tmp/ansible.tar.gz
     mode=0440
 
-- name: Create & ansible .deb
-  shell: tar zxvf ~/ansible.tar.gz && cd ansible-1.9.4-1 && make deb && dpkg -i ./deb-build/unstable/ansible_*.deb
+- name: Extract ansible.tar.gz
+  unarchive:
+    src=/tmp/ansible.tar.gz
+    dest=/tmp
+    copy=no
+    creates=/tmp/ansible-1.9.4-1
 
-- name: Remove extracted archive
-  file: path=ansible-1.9.4-1 state=absent
+- name: Install Ansible
+  shell: make install
+    chdir=/tmp/ansible-1.9.4-1
+    creates=/usr/local/bin/ansible
+
+- name: Remove temporary directory
+  file: path=/tmp/ansible-1.9.4-1 state=absent
 
 - name: Remove archive
-  file: path=~/ansible.tar.gz state=absent
+  file: path=/tmp/ansible.tar.gz state=absent
 

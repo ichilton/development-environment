@@ -1,6 +1,6 @@
 ---
-- name: Check if Ansible exists
-  stat: path=/usr/bin/ansible
+- name: Check if /usr/local/bin/ansible exists
+  stat: path=/usr/local/bin/ansible
   register: ansiblecheck
 
 - name: Install Ansible
