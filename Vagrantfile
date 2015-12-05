@@ -7,6 +7,9 @@ Vagrant.configure(2) do |config|
   # Forward ports to VM:
   # config.vm.network "forwarded_port", guest: 80, host: 8080
 
+  # SSH agent forwarding:
+  config.ssh.forward_agent = true
+
   # Use NFS for synced folders (faster)
   # config.vm.synced_folder ".", "/vagrant", type: "nfs"
 
@@ -18,8 +21,9 @@ Vagrant.configure(2) do |config|
     # config.vm.network :private_network, type: "dhcp"
   end
 
-  # SSH agent forwarding:
-  config.ssh.forward_agent = true
+  config.vm.provider :libvirt do |libvirt|
+    libvirt.memory = 1024
+  end
 
 
   # Provisioning
