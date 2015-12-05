@@ -2,10 +2,7 @@
 # vi: set ft=ruby :
 
 Vagrant.configure(2) do |config|
-  # config.vm.box = "debian-8.2"
-  config.vm.box = "jessie64"
-
-  config.vm.synced_folder ".", "/vagrant", type: "nfs"
+  config.vm.box = "debian-8.2"
 
   # Forward ports to VM:
   # config.vm.network "forwarded_port", guest: 80, host: 8080
@@ -40,6 +37,7 @@ Vagrant.configure(2) do |config|
     ansible.groups = {
       "ruby-dev" => ["default"],
       "go-dev" => ["default"]
+      "ansible" => ["default"]
     }
   end
 end
