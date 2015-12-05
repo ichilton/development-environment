@@ -36,8 +36,10 @@ Vagrant.configure(2) do |config|
 
     ansible.groups = {
       "ruby-dev" => ["default"],
-      "go-dev" => ["default"]
-      "ansible" => ["default"]
+      "go-dev" => ["default"],
+      "ansible" => ["default"],
+      "database" => ["default"]
     }
   end
 end
+

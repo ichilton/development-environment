@@ -1,0 +1,6 @@
+---
+- name: Install packages
+  apt: name={{ item }} install_recommends=no
+  with_items:
+    - postgresql
+

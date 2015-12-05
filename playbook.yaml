@@ -19,3 +19,10 @@
   roles:
     - ansible
 
+
+- hosts: database
+  sudo: yes
+  roles:
+    - mysql
+    - postgresql
+

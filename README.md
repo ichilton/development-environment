@@ -18,6 +18,4 @@ Example usage:
 
 TODO:
   - Pull out configurables into variables and ruby builds into loop
-  - More complete documentation
-  - Databases - MySQL, Postgres & client libraries
 
