@@ -11,27 +11,18 @@
     - python-crypto
     - sshpass
 
-- name: Download Ansible
-  get_url:
-    url=https://github.com/ansible/ansible/archive/v1.9.4-1.tar.gz
-    dest=/tmp/ansible.tar.gz
-    mode=0440
-
-- name: Extract ansible.tar.gz
-  unarchive:
-    src=/tmp/ansible.tar.gz
-    dest=/tmp
-    copy=no
-    creates=/tmp/ansible-1.9.4-1
+- name: Clone Ansible Repo
+  git:
+    repo=https://github.com/ansible/ansible.git
+    dest=/tmp/ansible
+    clone=yes
+    version=v1.9.4-1
 
 - name: Install Ansible
   shell: make install
-    chdir=/tmp/ansible-1.9.4-1
+    chdir=/tmp/ansible
     creates=/usr/local/bin/ansible
 
 - name: Remove temporary directory
-  file: path=/tmp/ansible-1.9.4-1 state=absent
-
-- name: Remove archive
-  file: path=/tmp/ansible.tar.gz state=absent
+  file: path=/tmp/ansible state=absent
 
