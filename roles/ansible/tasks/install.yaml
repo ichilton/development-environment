@@ -1,9 +1,10 @@
 ---
+
 - name: Install packages
   apt: name={{ item }} install_recommends=no
   with_items:
     - python-setuptools
-    - python-support
+    - dh-python
     - python-jinja2
     - python-yaml
     - python-paramiko
