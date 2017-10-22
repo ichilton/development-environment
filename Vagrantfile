@@ -2,7 +2,7 @@
 # vi: set ft=ruby :
 
 Vagrant.configure(2) do |config|
-  config.vm.box = "debian-8.2"
+  config.vm.box = "debian/stretch64"
 
   # Forward ports to VM:
   # config.vm.network "forwarded_port", guest: 80, host: 8080

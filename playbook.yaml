@@ -1,27 +1,32 @@
 ---
 - hosts: all
-  sudo: yes
+  become: yes
+  become_method: sudo
   roles:
     - common
 
 - hosts: ruby-dev
-  sudo: yes
+  become: yes
+  become_method: sudo
   roles:
     - ruby-dev
 
 - hosts: go-dev
-  sudo: yes
+  become: yes
+  become_method: sudo
   roles:
     - go-dev
 
 - hosts: ansible
-  sudo: yes
+  become: yes
+  become_method: sudo
   roles:
     - ansible
 
 
 - hosts: database
-  sudo: yes
+  become: yes
+  become_method: sudo
   roles:
     - mysql
     - postgresql
